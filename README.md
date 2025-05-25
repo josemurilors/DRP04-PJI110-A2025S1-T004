@@ -19,6 +19,7 @@ Lançamentos financeiros
 ![Captura de tela de 2025-05-24 23-08-30](https://github.com/user-attachments/assets/dc9cef9d-0dbf-4651-bcba-4cd396f1132f)
 
 Relatórios
+
 ![Captura de tela de 2025-05-24 23-08-34](https://github.com/user-attachments/assets/a776e6af-d4ce-418b-9f5d-8a8068e2b89b)
 
 Alertas
