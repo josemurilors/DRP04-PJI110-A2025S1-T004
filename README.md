@@ -6,7 +6,7 @@
 
 ### Apresentação
 
-Essa é a versão de apresentação do software de controle de de fluxo de caixa, feito para a empresa metalmir . O software apresenta 
+Essa é a versão de apresentação do software de controle de de fluxo de caixa, feito para a empresa metalmir. O software apresenta:
 
 Uma tela de login
 ![Captura de tela de 2025-05-24 23-06-34](https://github.com/user-attachments/assets/1de24335-8463-4d76-bbda-e267b48e5855)
