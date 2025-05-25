@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2><i class="fas fa-chart-line"></i> Previsão de Caixa</h2>
+
+<div class="form-container">
+    <form method="POST" action="{{ url_for('calcular_previsao') }}">
+        <div class="form-row">
+            <div class="form-group">
+                <label for="meses_analise">Período para análise (meses):</label>
+                <input type="number" name="meses_analise" id="meses_analise" 
+                       value="3" min="1" max="12" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="meses_previsao">Período para previsão (meses):</label>
+                <input type="number" name="meses_previsao" id="meses_previsao" 
+                       value="1" min="1" max="6" required>
+            </div>
+        </div>
+        
+        <button type="submit"><i class="fas fa-calculator"></i> Calcular Previsão</button>
+    </form>
+</div>
+
+{% if previsao %}
+<div class="result-container">
+    <h3><i class="fas fa-chart-area"></i> Resultado da Previsão</h3>
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th>Mês</th>
+                    <th>Previsão Receitas</th>
+                    <th>Previsão Despesas</th>
+                    <th>Saldo Previsto</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in previsao %}
+                <tr>
+                    <td>{{ item.mes }}</td>
+                    <td>R$ {{ "%.2f"|format(item.receitas) }}</td>
+                    <td>R$ {{ "%.2f"|format(item.despesas) }}</td>
+                    <td>
+                        <span class="{% if item.saldo >= 0 %}text-success{% else %}text-danger{% endif %}">
+                            R$ {{ "%.2f"|format(item.saldo) }}
+                        </span>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

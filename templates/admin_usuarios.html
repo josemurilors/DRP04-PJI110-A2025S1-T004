@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Gerenciar Usuários</h2>
+<a href="{{ url_for('admin_novo_usuario') }}" class="btn">Novo Usuário</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Usuário</th>
+            <th>Nome</th>
+            <th>Admin</th>
+            <th>Ativo</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for usuario in usuarios %}
+        <tr>
+            <td>{{ usuario.id }}</td>
+            <td>{{ usuario.username }}</td>
+            <td>{{ usuario.nome }}</td>
+            <td>{{ 'Sim' if usuario.is_admin else 'Não' }}</td>
+            <td>{{ 'Sim' if usuario.ativo else 'Não' }}</td>
+            <td>
+                <a href="{{ url_for('admin_editar_usuario', id=usuario.id) }}">Editar</a>
+                {% if usuario.id != current_user.id %}
+                | <a href="{{ url_for('admin_toggle_ativar_usuario', id=usuario.id) }}">{% if usuario.ativo %}Desativar{% else %}Ativar{% endif %}</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

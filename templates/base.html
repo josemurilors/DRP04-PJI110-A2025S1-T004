@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Fluxo de Caixa - Metalmir</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <header>
+    <div class="header-container">
+        <h1 class="header-title"><i class="fas fa-calculator"></i> Metalmir - Fluxo de Caixa</h1>
+        <nav>
+            <a href="{{ url_for('index') }}"><i class="fas fa-home"></i> Início</a>
+            <a href="{{ url_for('lancamentos') }}"><i class="fas fa-exchange-alt"></i> Lançamentos</a>
+            <a href="{{ url_for('relatorios') }}"><i class="fas fa-chart-bar"></i> Relatórios</a>
+            <a href="{{ url_for('alertas') }}"><i class="fas fa-bell"></i> Alertas</a>
+            <a href="{{ url_for('previsao') }}"><i class="fas fa-chart-line"></i> Previsão</a>
+        </nav>
+        {% if current_user.is_authenticated %}
+        <div class="user-info">
+            <span class="user-name"><i class="fas fa-user-circle"></i> {{ current_user.nome }}</span>
+            <div class="user-actions">
+                {% if current_user.is_admin %}
+                <a href="{{ url_for('admin_usuarios') }}" class="admin-link"><i class="fas fa-cog"></i> Admin</a>
+                {% endif %}
+                <a href="{{ url_for('logout') }}" class="logout-link"><i class="fas fa-sign-out-alt"></i> Sair</a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+  </header>
+    
+  <main>
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        <i class="fas fa-{% if category == 'success' %}check-circle{% else %}exclamation-circle{% endif %}"></i>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        {% block content %}{% endblock %}
+
+<div class="resumo-mensal">
+    <h2>Resumo do Fluxo de Caixa</h2>
+    <div class="grafico-container">
+        <canvas id="graficoPizza"></canvas>
+    </div>
+    {% if saldo is defined %}
+    <div class="saldo {% if saldo >= 0 %}positivo{% else %}negativo{% endif %}">
+        Saldo Mensal: R$ {{ "%.2f"|format(saldo) }}
+    </div>
+    {% endif %}
+</div>
+
+    </div>
+  </main>
+    
+  <footer>
+    <p>Sistema de Fluxo de Caixa - Metalmir &copy; {{ now.strftime('%Y') if now else '' }}</p>
+  </footer>
+ <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const ctx = document.getElementById('graficoPizza');
+        if (ctx) {
+            const dados = {
+                labels: ['Receitas', 'Despesas'],
+                datasets: [{
+                    data: [
+                        {{ dados_grafico.Receitas|default(0) }}, 
+                        {{ dados_grafico.Despesas|default(0) }}
+                    ],
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.6)',
+                        'rgba(255, 99, 132, 0.6)'
+                    ],
+                    borderColor: [
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(255, 99, 132, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            };
+            
+            new Chart(ctx, {
+                type: 'pie',
+                data: dados,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: 'bottom' },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.label + ': R$ ' + context.raw.toFixed(2);
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    });
+</script>
+</html>

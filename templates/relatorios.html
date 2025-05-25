@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2><i class="fas fa-chart-bar"></i> Relatórios</h2>
+
+<div class="form-container">
+    <form method="POST" action="{{ url_for('gerar_relatorio') }}">
+        <div class="form-row">
+            <div class="form-group">
+                <label for="data_inicio">Data Inicial:</label>
+                <input type="date" name="data_inicio" id="data_inicio" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="data_fim">Data Final:</label>
+                <input type="date" name="data_fim" id="data_fim" required>
+            </div>
+        </div>
+        
+        <div class="button-group">
+            <button type="submit" name="formato" value="pdf" class="btn danger">
+                <i class="fas fa-file-pdf"></i> Gerar PDF
+            </button>
+            <button type="submit" name="formato" value="excel" class="btn success">
+                <i class="fas fa-file-excel"></i> Gerar Excel
+            </button>
+        </div>
+    </form>
+</div>
+
+{% if grafico %}
+<div class="chart-container">
+    <h3><i class="fas fa-chart-pie"></i> Gráfico de Fluxo de Caixa</h3>
+    <img src="{{ grafico }}" alt="Gráfico de Fluxo de Caixa" class="chart-image">
+</div>
+{% endif %}
+{% endblock %}
