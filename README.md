@@ -13,9 +13,11 @@ Uma tela de login
 
 
 Uma tela de início com um gráfico do resumo do fluxo de caixa
+
 ![Captura de tela de 2025-05-24 23-08-19](https://github.com/user-attachments/assets/5b7a6696-b8ed-48e4-a6b4-e2949ccc55a3)
 
 Lançamentos financeiros
+
 ![Captura de tela de 2025-05-24 23-08-30](https://github.com/user-attachments/assets/dc9cef9d-0dbf-4651-bcba-4cd396f1132f)
 
 Relatórios
