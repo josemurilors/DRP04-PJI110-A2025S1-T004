@@ -25,12 +25,15 @@ Relatórios
 ![Captura de tela de 2025-05-24 23-08-34](https://github.com/user-attachments/assets/a776e6af-d4ce-418b-9f5d-8a8068e2b89b)
 
 Alertas
+
 ![Captura de tela de 2025-05-24 23-08-38](https://github.com/user-attachments/assets/a0c9dfb0-4508-4181-9406-1e6bf1d3930e)
 
 Previsão de caixa
+
 ![Captura de tela de 2025-05-24 23-08-42](https://github.com/user-attachments/assets/7f88539a-b972-40be-8876-d256e6c7252e)
 
 E tela de edição de usuários(admnistradores)
+
 ![Captura de tela de 2025-05-24 23-09-25](https://github.com/user-attachments/assets/41128397-23c4-423f-b4fb-9fd27e4d3fd5)
 ![Captura de tela de 2025-05-24 23-09-30](https://github.com/user-attachments/assets/d1a141c9-6f6e-4bad-ae86-508ac2891158)
 
