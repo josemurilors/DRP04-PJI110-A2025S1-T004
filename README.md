@@ -58,7 +58,6 @@ python app.py
 
     Abra seu navegador e acesse: http://localhost:5000
     Faça login com:
-    ```
     Usuário: admin
     Senha: admin123
-    ```
+  
